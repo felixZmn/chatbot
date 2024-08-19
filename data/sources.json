@@ -1,0 +1,73 @@
+{
+  "documentSources": [
+    {
+      "file": "Studienverlaufsuebersicht-AI-2018.pdf",
+      "description": "Verlaufsplan: Fächer (Module) im Studiengang 'Allgemeine Informatik', dazu die jeweiligen Credit Points (CP)",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Studieninhalte_und_Profil/Studienverlaufsuebersicht-AI-2018.pdf"
+    },
+    {
+      "file": "Informatik_ModulbeschreibungT2INF_IT_20110614.pdf",
+      "description": "Angaben je Modul: Formale Angaben, Zeitpunkt während des Studiums, Prüfungsformen, Workload, erlangte Qualifikationsziele und Kompetenzen, Lerneinheiten, Inhalte, vorgeschlagene Literatur",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Informatik_ModulbeschreibungT2INF_IT_20110614.pdf"
+    },
+    {
+      "file": "TerminplanInformatikDHBW-HDH.pdf",
+      "description": "Terminplan: Grober Ablauf je Studienjahr, Abgabedatum der Projektarbeiten und Bachelorarbeit",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Studienverlauf_und_Organisatorisches/TerminplanInformatikDHBW-HDH.pdf"
+    },
+    {
+      "file": "Antrag_auf_Pruefungsruecktritt.doc",
+      "description": "Formular für den Prüfungsrücktritt. Auszufüllen bei Krankheit",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Informationen_fuer_Studierende/Antrag_auf_Pruefungsruecktritt.doc"
+    },
+    {
+      "file": "Antrag_auf_Fristverlaengerung.doc",
+      "description": "Antrag zur Verlängerung von Fristen für jegliche Prüfungsleistungen, wie Projektarbeiten oder Programmentwürfen",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Informationen_fuer_Studierende/Antrag_auf_Fristverlaengerung.doc"
+    },
+    {
+      "file": "Anmeldung_Projektarbeit_Studienarbeit_Bachelorarbeit_Fakultaet_Technik.doc",
+      "description": "Dokument zur Anmeldung des Themas für Projektarbeiten, Bachelorarbeit. Das Thema wird auf dieser Basis vom Prüfungsausschuss genehmigt oder Anpassungsvorschläge erstellt",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informationen_fuer_Studierende_Technik_allgemein/Anmeldung_Projektarbeit_Studienarbeit_Bachelorarbeit_Fakultaet_Technik.doc"
+    },
+    {
+      "file": "Antrag_Exmatrikulation_DHBW_Heidenheim_V6_01.pdf",
+      "description": "Antrag zur Exmatrikulation",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informationen_fuer_Studierende_Technik_allgemein/Antrag_Exmatrikulation_DHBW_Heidenheim_V6_01.pdf"
+    },
+    {
+      "file": "191212_Leitlinien_Praxismodule_Studien_Bachelorarbeiten.pdf",
+      "description": "Leitlinien für wissenschaftliche Arbeiten. Gibt eine Übersicht über die durchzuführenden Projektarbeiten und die Anforderungen",
+      "source": "https://www.dhbw.de/fileadmin/user_upload/Dokumente/Dokumente_fuer_Studierende/191212_Leitlinien_Praxismodule_Studien_Bachelorarbeiten.pdf"
+    },
+    {
+      "file": "Bewerbung und Zulassung _ DHBW Heidenheim.pdf",
+      "description": "Infos über die Bewerbung für Studieninteressierte",
+      "source": "https://www.heidenheim.dhbw.de/studium-lehre/bewerbung-zulassung"
+    },
+    {
+      "file": "Bewerbung und Zulassung _Fachhochschulreife_ DHBW Heidenheim.pdf",
+      "descriptions": "Infos über die Bewerbung von Studieninteressierten mit Fachhochschulreife",
+      "source": "https://www.heidenheim.dhbw.de/studium-lehre/bewerbung-zulassung#fachhochschulreife"
+    },
+    {
+      "file": "Bewerbung und Zulassung _berufliche_Qualifikation_ DHBW Heidenheim.pdf",
+      "descriptions": "Infos über die Bewerbung von Studieninteressierten ohne Abitur mit entsprechender beruflichen Qualifikation",
+      "source": "https://www.heidenheim.dhbw.de/studium-lehre/bewerbung-zulassung#beruflich-qualifizierte"
+    },
+    {
+      "file": "Prüfungsordnung Studienbereich Technik.pdf",
+      "description": "Prüfungsordnung für den Studienbereich Technik",
+      "source": "https://www.heidenheim.dhbw.de/fileadmin/user_upload/Dokumente/Amtliche_Bekanntmachungen/2023/21_2023_Bekanntmachung_StuPrO_Technik_inkl._Siebter_AEnderungssatzung.pdf"
+    },
+    {
+      "description": "Homepage der DHBW Heidenheim. Informationen über das Studium, Studienplätze, jegliche Antragsformulare oder Richtlinien",
+      "source": "https://www.heidenheim.dhbw.de/startseite"
+    },
+    {
+      "file": "DHBW Heidenheim Wikipedia.pdf",
+      "description": "Wikipedia-Seite der DHBW Heidenheim. Informationen zur Geschichte der Hochschule, Zahl der Studierenden, Studiengänge",
+      "source": "https://de.wikipedia.org/wiki/Duale_Hochschule_Baden-W%C3%BCrttemberg_Heidenheim"
+    }
+  ]
+}
