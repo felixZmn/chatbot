@@ -1,12 +1,16 @@
-import torch
-from llama_cloud import ChatMessage, MessageRole
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings, StorageContext, load_index_from_storage, \
-    ServiceContext
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.llms.ollama import Ollama
+import os
 import time
 import warnings
-from llama_index.core import ChatPromptTemplate
+
+import torch
+from llama_cloud import ChatMessage, MessageRole
+from llama_index.core import (ChatPromptTemplate, Settings,
+                              SimpleDirectoryReader, StorageContext,
+                              VectorStoreIndex, load_index_from_storage)
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.ollama import Ollama
+
+PERSIST_DIR = "./storage"
 
 warnings.filterwarnings(
     "ignore", message=".*Torch was not compiled with flash attention.*")
@@ -43,7 +47,6 @@ qa_messages = [
 
 qa_template = ChatPromptTemplate(qa_messages)
 
-PERSIST_DIR = "./storage"
 
 
 def load_index(directory):
@@ -70,6 +73,17 @@ def load_index(directory):
     return index
 
 
+def delete_missing_docs(index: VectorStoreIndex) -> VectorStoreIndex:
+    """Delete documents from the index that are missing on disk."""
+    print("Deleting missing documents...")
+    for id, doc in index.ref_doc_info.items():
+        if not os.path.exists(doc.metadata['file_path']):
+            print(f"Deleting missing document: {doc.metadata['file_path']}")
+            index.delete_ref_doc(id, delete_from_docstore=True)
+    index.storage_context.persist(persist_dir=PERSIST_DIR)
+    return index
+
+
 if __name__ == "__main__":
     # Start time
     start_time = time.time()
@@ -87,6 +101,7 @@ if __name__ == "__main__":
 
     # Load index with documents from ./data
     index = load_index("data")
+    index = delete_missing_docs(index)
 
     # Perform RAG query
     print("Performing query...")
