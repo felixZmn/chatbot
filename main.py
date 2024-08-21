@@ -48,13 +48,13 @@ qa_messages = [
 qa_template = ChatPromptTemplate(qa_messages)
 
 
-
-def load_index(directory):
+def load_index(docs_dir: str) -> VectorStoreIndex:
+    """Load index from storage or create a new one from documents in the given directory."""
     documents = SimpleDirectoryReader(
-        directory, filename_as_id=True).load_data()
+        docs_dir, filename_as_id=True).load_data()
 
     try:
-        # Load index from storage
+        # Try load index from storage
         print("Loading index from storage...")
         storage_context = StorageContext.from_defaults(persist_dir=PERSIST_DIR)
         index = load_index_from_storage(storage_context)
@@ -66,8 +66,8 @@ def load_index(directory):
 
     # Refresh the reference documents and persist the index
     print("Refreshing reference documents...")
-    index.refresh_ref_docs(
-        documents, update_kwargs={"delete_kwargs": {'delete_from_docstore': True}})
+    index.refresh_ref_docs(documents, update_kwargs={
+                           "delete_kwargs": {'delete_from_docstore': True}})
     index.storage_context.persist(persist_dir=PERSIST_DIR)
 
     return index
@@ -105,15 +105,14 @@ if __name__ == "__main__":
 
     # Perform RAG query
     print("Performing query...")
-    query_engine = index.as_query_engine(text_qa_template=qa_template, streaming=True)
+    query_engine = index.as_query_engine(
+        text_qa_template=qa_template, streaming=True)
     streaming_response = query_engine.query(
         "Wann wurde die DHBW Heidenheim gegründet?")
 
     streaming_response.print_response_stream()
 
-    # End time
-    end_time = time.time()
-
     # Calculate and print the elapsed time
+    end_time = time.time()
     elapsed_time = end_time - start_time
-    print(f"Elapsed time: {elapsed_time:.2f} seconds")
+    print(f"\nElapsed time: {elapsed_time:.2f} seconds")
