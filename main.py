@@ -116,3 +116,9 @@ if __name__ == "__main__":
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"\nElapsed time: {elapsed_time:.2f} seconds")
+
+    # Loop for chat
+    while True:
+        query_engine.query(input("\nFrage: ")).print_response_stream()
+        time.sleep(1)
+
