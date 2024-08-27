@@ -46,5 +46,5 @@ if __name__ == "__main__":
 
     # Loop for chat
     while True:
-        chat_bot.perform_query(input("\nFrage: "), course)
+        print(chat_bot.perform_query(input("\nFrage: "), course))
         time.sleep(1)
