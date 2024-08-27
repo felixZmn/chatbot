@@ -59,6 +59,9 @@ qa_template = ChatPromptTemplate(qa_messages)
 class ChatBot(object):
     def __init__(self):
         print("ChatBot Initializing...")
+        for course in Course:
+            self.__load_index(course)
+            self.refresh_index(course)
         print("ChatBot Initialized.")
 
     def __load_index(self, course: Course) -> VectorStoreIndex:
@@ -96,9 +99,9 @@ class ChatBot(object):
         storage_context = StorageContext.from_defaults(
             persist_dir=course.persist_dir())
         index = load_index_from_storage(storage_context)
-        index = self.__delete_missing_docs(index)
+        index = self.__delete_missing_docs(course)
         documents = SimpleDirectoryReader(
-            course.data_dir, filename_as_id=True).load_data()
+            course.data_dir(), filename_as_id=True).load_data()
         index.refresh_ref_docs(documents, update_kwargs={
             "delete_kwargs": {'delete_from_docstore': True}})
         index.storage_context.persist(persist_dir=course.persist_dir())
