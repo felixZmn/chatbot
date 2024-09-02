@@ -1,4 +1,3 @@
-import time
 from enum import Enum
 import os
 import json
@@ -10,9 +9,6 @@ from PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
 
 PERSIST_DIR = "./storage"
 DATA_DIR = "./data"
-
-WI = "/wi"
-IT = "/it"
 
 
 class Course(Enum):
@@ -99,7 +95,8 @@ class ChatBot(object):
                 continue
             source_info = self.get_source_info(course, document)
             if source_info is None:
-                print(f'file {document.metadata["file_name"]} not loaded. No proper entry in sources.json for this file')
+                print(
+                    f'file {document.metadata["file_name"]} not loaded. No proper entry in sources.json for this file')
                 continue
 
             document.metadata.update({

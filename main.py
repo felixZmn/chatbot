@@ -36,7 +36,8 @@ if __name__ == "__main__":
 
     # Perform RAG query
     print("Performing query...")
-    result = chat_bot.perform_query("In welcher Straße befindet sich die DHBW?", course)
+    result = chat_bot.perform_query(
+        "In welcher Straße befindet sich die DHBW?", course)
     print(result)
 
     # Calculate and print the elapsed time
