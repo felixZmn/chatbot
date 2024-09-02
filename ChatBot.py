@@ -98,6 +98,10 @@ class ChatBot(object):
             if document.metadata["file_name"] == "sources.json":
                 continue
             source_info = self.get_source_info(course, document)
+            if source_info is None:
+                print(f'file {document.metadata["file_name"]} not loaded. No proper entry in sources.json for this file')
+                continue
+
             document.metadata.update({
                 "priority": source_info["priority"],
                 "file_name": source_info["name"],
