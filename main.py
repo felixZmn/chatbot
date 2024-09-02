@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     # Perform RAG query
     print("Performing query...")
-    result = chat_bot.perform_query("Wer ist die Studiengangsleitung?", course)
+    result = chat_bot.perform_query("In welcher Straße befindet sich die DHBW?", course)
     print(result)
 
     # Calculate and print the elapsed time
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     elapsed_time = end_time - start_time
     print(f"\nElapsed time: {elapsed_time:.2f} seconds")
 
-    # Loop for chat
+    # # Loop for chat
     while True:
         print(chat_bot.perform_query(input("\nFrage: "), course))
         time.sleep(1)
