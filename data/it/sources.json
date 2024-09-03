@@ -13,13 +13,6 @@
       "file": "Studiengangsflyer_web_Informatik.pdf",
       "description": "Infos zum Studium. Vorteile des dualen Studiums. Studiengangsleitung und Schwerpunkte der Studienrichtung, sowie mögliche Berufsfelder nach Abschluss",
       "web_link": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Studieninhalte_und_Profil/Studiengangsflyer_web_Informatik.pdf"
-    },
-    {
-      "priority": 1,
-      "name": "Informationen über die Studiengangsleitung",
-      "file": "priority_test.txt",
-      "description": "Informationen über die Studiengangsleitung",
-      "web_link": "https://www.tollequelle.de"
     }
   ]
 }
