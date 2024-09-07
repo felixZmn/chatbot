@@ -1,0 +1,29 @@
+- name: Chatbot Setup
+  hosts: all
+  tasks:
+   - name: Install required packages
+     become: true
+     ansible.builtin.apt:
+      update_cache: yes
+      pkg:
+      - git
+      - vim
+      - nvidia-utils-535-server
+      - python3
+      - python3-pip
+      - nvidia-driver-550 
+      - nvidia-dkms-550
+
+#   - name: Install ollama
+#     ansible.builtin.shell: |
+#      curl -fsSL https://ollama.com/install.sh | sh
+
+   - name: checkout project
+     ansible.builtin.git:
+      repo: https://github.com/felixZmn/chatbot
+      dest: ./chatbot
+
+   - name: install chatbot
+     ansible.builtin.shell: |
+       python3 -m venv ./chatbot/.venv
+       ./chatbot/.venv/bin/pip install -r ./chatbot/requirements.txt
