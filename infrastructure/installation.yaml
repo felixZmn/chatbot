@@ -17,6 +17,7 @@
 #   - name: Install ollama
 #     ansible.builtin.shell: |
 #      curl -fsSL https://ollama.com/install.sh | sh
+#      ollama pull llama3.1
 
    - name: checkout project
      ansible.builtin.git:
