@@ -26,6 +26,8 @@ additional_kwargs = {}
 
 qa_messages = [
     ChatMessage(
+        id="system",
+        index=0,
         role=MessageRole.SYSTEM,
         content=(
             """
@@ -45,6 +47,8 @@ qa_messages = [
         additional_kwargs=additional_kwargs
     ),
     ChatMessage(
+        id="user",
+        index=1,
         role=MessageRole.USER,
         content=(
             """
