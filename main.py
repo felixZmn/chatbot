@@ -7,6 +7,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
 
 from ChatBot import ChatBot, Course
+from logger import chatbot_logger, message_logger
 
 
 warnings.filterwarnings(
@@ -14,12 +15,16 @@ warnings.filterwarnings(
 
 
 if __name__ == "__main__":
+    # Loggers
+    message_logger = message_logger(logLevel=10)
+    chatbot_logger = chatbot_logger(logLevel=10)
+
     # Start time
     start_time = time.time()
 
     # Check if CUDA is available
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"Using device: {device}")
+    chatbot_logger.info(f"Using device: {device}")
 
     # Embeddings model
     Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-m3")
@@ -35,17 +40,22 @@ if __name__ == "__main__":
     chat_bot = ChatBot()
 
     # Perform RAG query
-    print("Performing query...")
-    result = chat_bot.perform_query(
-        "In welcher Straße befindet sich die DHBW?", course)
+    query = "In welcher Straße befindet sich die DHBW?"
+    result = chat_bot.perform_query(query, course)
+    message_logger.info(
+        f"Course: {course} \t Query: {query} \t Result: {result}")
     print(result)
 
     # Calculate and print the elapsed time
     end_time = time.time()
     elapsed_time = end_time - start_time
-    print(f"\nElapsed time: {elapsed_time:.2f} seconds")
+    chatbot_logger.debug(f"Elapsed time: {elapsed_time:.2f} seconds")
 
     # # Loop for chat
     while True:
-        print(chat_bot.perform_query(input("\nFrage: "), course))
+        query = input("\nFrage: ")
+        result = chat_bot.perform_query(query, course)
+        message_logger.info(
+            f"Course: {course} \t Query: {query} \t Result: {result}")
+        print(result)
         time.sleep(1)

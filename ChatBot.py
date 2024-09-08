@@ -1,11 +1,17 @@
-from enum import Enum
-import os
 import json
+import logging
+import os
+from enum import Enum
+
 from llama_cloud import ChatMessage, MessageRole
-from llama_index.core import (
-    SimpleDirectoryReader, StorageContext, VectorStoreIndex, load_index_from_storage, ChatPromptTemplate)
+from llama_index.core import (ChatPromptTemplate, SimpleDirectoryReader,
+                              StorageContext, VectorStoreIndex,
+                              load_index_from_storage)
 
 from PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
+
+message_logger = logging.getLogger('Messages')
+chatbot_logger = logging.getLogger('ChatBot')
 
 PERSIST_DIR = "./storage"
 DATA_DIR = "./data"
@@ -67,11 +73,11 @@ qa_template = ChatPromptTemplate(qa_messages)
 
 class ChatBot(object):
     def __init__(self):
-        print("ChatBot Initializing...")
+        chatbot_logger.info("ChatBot Initializing...")
         for course in Course:
             self.__load_index(course)
             self.refresh_index(course)
-        print("ChatBot Initialized.")
+        chatbot_logger.info("ChatBot Initialized.")
 
     def get_source_info(self, course, document):
         """
@@ -94,12 +100,13 @@ class ChatBot(object):
         :param course: active course
         :return:
         """
+        chatbot_logger.debug("Enriching metadata...")
         for document in documents:
             if document.metadata["file_name"] == "sources.json":
                 continue
             source_info = self.get_source_info(course, document)
             if source_info is None:
-                print(
+                chatbot_logger.warning(
                     f'file {document.metadata["file_name"]} not loaded. No proper entry in sources.json for this file')
                 continue
 
@@ -112,6 +119,7 @@ class ChatBot(object):
 
     def __load_index(self, course: Course) -> VectorStoreIndex:
         """Load index from storage or create a new one from documents in the given directory."""
+        chatbot_logger.info("Loading index...")
         documents = SimpleDirectoryReader(
             course.data_dir(), filename_as_id=True).load_data()
 
@@ -119,13 +127,13 @@ class ChatBot(object):
 
         try:
             # Try load index from storage
-            print("Loading index from storage...")
+            chatbot_logger.debug("Loading index from storage...")
             storage_context = StorageContext.from_defaults(
                 persist_dir=course.persist_dir())
             index = load_index_from_storage(storage_context)
         except FileNotFoundError:
             # Create index from documents and persist it
-            print("Creating index from documents...")
+            chatbot_logger.debug("Creating index from documents...")
             index = VectorStoreIndex.from_documents(
                 documents, show_progress=True, )
             index.storage_context.persist(persist_dir=course.persist_dir())
@@ -134,16 +142,20 @@ class ChatBot(object):
     def __delete_missing_docs(self, course: Course) -> VectorStoreIndex:
         """Delete documents from the index that are missing on disk."""
         index = self.__load_index(course)
-        print("Deleting missing documents...")
+        chatbot_logger.info("Checking for missing documents...")
         for id, doc in index.ref_doc_info.items():
             if not os.path.exists(doc.metadata['file_path']):
-                print(
+                chatbot_logger.debug(
                     f"Deleting missing document: {doc.metadata['file_path']}")
                 index.delete_ref_doc(id, delete_from_docstore=True)
         index.storage_context.persist(persist_dir=course.persist_dir())
         return index
 
     def refresh_index(self, course: Course):
+        chatbot_logger.info("Refreshing index...")
+        chatbot_logger.debug(f"Course: {course}")
+        chatbot_logger.debug(f"Data dir: {course.data_dir()}")
+        chatbot_logger.debug(f"Persist dir: {course.persist_dir()}")
         storage_context = StorageContext.from_defaults(
             persist_dir=course.persist_dir())
         index = load_index_from_storage(storage_context)
@@ -155,6 +167,9 @@ class ChatBot(object):
         index.storage_context.persist(persist_dir=course.persist_dir())
 
     def perform_query(self, query: str, course: Course):
+        chatbot_logger.info(f"Performing query")
+        chatbot_logger.debug(f"Query: {query}")
+        chatbot_logger.debug(f"Course: {course}")
         index = self.__load_index(course)
 
         query_engine = index.as_query_engine(
