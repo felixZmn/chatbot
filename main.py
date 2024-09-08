@@ -7,7 +7,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
 
 from ChatBot import ChatBot, Course
-from logger import chatbot_logger, message_logger
+from logger import chatbot_logger
 
 
 warnings.filterwarnings(
@@ -16,7 +16,6 @@ warnings.filterwarnings(
 
 if __name__ == "__main__":
     # Loggers
-    message_logger = message_logger(logLevel=10)
     chatbot_logger = chatbot_logger(logLevel=10)
 
     # Start time
@@ -42,8 +41,6 @@ if __name__ == "__main__":
     # Perform RAG query
     query = "In welcher Straße befindet sich die DHBW?"
     result = chat_bot.perform_query(query, course)
-    message_logger.info(
-        f"Course: {course} \t Query: {query} \t Result: {result}")
     print(result)
 
     # Calculate and print the elapsed time
@@ -55,7 +52,5 @@ if __name__ == "__main__":
     while True:
         query = input("\nFrage: ")
         result = chat_bot.perform_query(query, course)
-        message_logger.info(
-            f"Course: {course} \t Query: {query} \t Result: {result}")
         print(result)
         time.sleep(1)
