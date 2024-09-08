@@ -1,12 +1,17 @@
 import json
 import logging
 import os
+import torch
 from enum import Enum
 
 from llama_cloud import ChatMessage, MessageRole
 from llama_index.core import (ChatPromptTemplate, SimpleDirectoryReader,
                               StorageContext, VectorStoreIndex,
                               load_index_from_storage)
+
+from llama_index.core import Settings
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.ollama import Ollama
 
 from PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
 
@@ -74,6 +79,17 @@ qa_template = ChatPromptTemplate(qa_messages)
 class ChatBot(object):
     def __init__(self):
         chatbot_logger.info("ChatBot Initializing...")
+        # Check if CUDA is available
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        chatbot_logger.info(f"Using device: {device}")
+
+        # Embeddings model
+        Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-m3")
+
+        # Language model
+        Settings.llm = Ollama(
+            model="llama3.1", request_timeout=360.0, device=device)
+
         for course in Course:
             self.__load_index(course)
             self.refresh_index(course)
