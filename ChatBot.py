@@ -178,5 +178,6 @@ class ChatBot(object):
         )
 
         response = query_engine.query(query)
-
+        message_logger.info(
+            f"Course: {course} \t Query: {query} \t #response: {response}")
         return response
