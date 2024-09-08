@@ -10,7 +10,8 @@ rag_messages = [
         role=MessageRole.SYSTEM,
         content=(
             """
-                Beantworte die Frage anhand der gegebenen RAG Dokumente
+                Beantworte die Frage anhand der gegebenen RAG Dokumente.
+                Beginne deine Antwort mit "Answer:"
             """
         ),
         additional_kwargs=additional_kwargs
@@ -25,7 +26,6 @@ rag_messages = [
             {context_str}
             Frage:
             {query_str}
-            Answer:
             """
         ),
         additional_kwargs=additional_kwargs

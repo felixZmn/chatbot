@@ -5,11 +5,9 @@ import torch
 from enum import Enum
 
 from llama_cloud import ChatMessage, MessageRole
-from llama_index.core import (
-    SimpleDirectoryReader, StorageContext, VectorStoreIndex, load_index_from_storage, ChatPromptTemplate)
 from llama_index.core.agent import ReActAgent
 from llama_index.core.tools import QueryEngineTool, ToolMetadata, FunctionTool
-from llama_index.core import (ChatPromptTemplate, SimpleDirectoryReader,
+from llama_index.core import (SimpleDirectoryReader,
                               StorageContext, VectorStoreIndex,
                               load_index_from_storage)
 
@@ -20,8 +18,10 @@ from llama_index.llms.ollama import Ollama
 from PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
 from helpers.RagPrompt import rag_messages, rag_template
 
+
 message_logger = logging.getLogger('Messages')
 chatbot_logger = logging.getLogger('ChatBot')
+unanswered_questions_logger = logging.getLogger('UnansweredQuestions')
 
 PERSIST_DIR = "./storage"
 DATA_DIR = "./data"
@@ -181,6 +181,7 @@ class ChatBot(object):
         :param question: The question asked by user
         :return:
         """
+        unanswered_questions_logger.warning(f"Could not answer following question: {question}")
         print(f"LOG: Following question could not be answered {question}")
         return "Answer: Ich kann diese Frage leider nicht beantworten."
 
@@ -233,8 +234,7 @@ class ChatBot(object):
 
         response = agent.chat(query)
         message_logger.info(
-            f"Course: {course} \t Query: {query} \t response: {response}")
-        return response
+            f"Course: {course} \t Query: {query} \t #response: {response}")
 
         output = response.response + self.build_sources_output(response)
 
