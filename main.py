@@ -3,7 +3,7 @@ import warnings
 
 
 from ChatBot import ChatBot, Course
-from logger import chatbot_logger, message_logger
+from logger import chatbot_logger, message_logger, unanswered_questions_logger
 
 
 warnings.filterwarnings(
@@ -14,6 +14,7 @@ if __name__ == "__main__":
     # Loggers
     chatbot_logger = chatbot_logger(logLevel=10)
     message_logger = message_logger(logLevel=10)
+    unanswered_questions_logger = unanswered_questions_logger(logLevel=10)
 
     # Start time
     start_time = time.time()
@@ -24,10 +25,10 @@ if __name__ == "__main__":
     # setup Bot
     chat_bot = ChatBot()
 
-    # Perform RAG query
-    query = "In welcher Straße befindet sich die DHBW?"
-    result = chat_bot.perform_query(query, course)
-    print(result)
+    # # Perform RAG query
+    # query = "In welcher Straße befindet sich die DHBW?"
+    # result = chat_bot.perform_query(query, course)
+    # print(result)
 
     # Calculate and print the elapsed time
     end_time = time.time()
