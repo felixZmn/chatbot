@@ -1,23 +1,19 @@
 import json
 import logging
 import os
-import torch
 from enum import Enum
 
+import torch
 from llama_cloud import ChatMessage, MessageRole
+from llama_index.core import (Settings, SimpleDirectoryReader, StorageContext,
+                              VectorStoreIndex, load_index_from_storage)
 from llama_index.core.agent import ReActAgent
-from llama_index.core.tools import QueryEngineTool, ToolMetadata, FunctionTool
-from llama_index.core import (SimpleDirectoryReader,
-                              StorageContext, VectorStoreIndex,
-                              load_index_from_storage)
-
-from llama_index.core import Settings
+from llama_index.core.tools import FunctionTool, QueryEngineTool, ToolMetadata
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
 
-from PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
 from helpers.RagPrompt import rag_messages, rag_template
-
+from PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
 
 message_logger = logging.getLogger('Messages')
 chatbot_logger = logging.getLogger('ChatBot')
@@ -135,7 +131,8 @@ class ChatBot(object):
         self.enrich_metadata(documents, course)
 
         # Filter documents
-        filtered_documents = [doc for doc in documents if doc.metadata.get("file_name") != "sources.json"]
+        filtered_documents = [doc for doc in documents if doc.metadata.get(
+            "file_name") != "sources.json"]
 
         return filtered_documents
 
@@ -191,7 +188,8 @@ class ChatBot(object):
         :param question: The question asked by user
         :return:
         """
-        unanswered_questions_logger.warning(f"Could not answer following question: {question}")
+        unanswered_questions_logger.warning(
+            f"Could not answer following question: {question}")
         print(f"LOG: Following question could not be answered {question}")
         return "Answer: Ich kann diese Frage leider nicht beantworten."
 
@@ -235,7 +233,6 @@ class ChatBot(object):
             output += f"\n [{index}] {node.metadata['source_link']}"
         return output
 
-
     def perform_query(self, query: str, course: Course):
         chatbot_logger.info(f"Performing query")
         chatbot_logger.debug(f"Query: {query}")
@@ -244,7 +241,7 @@ class ChatBot(object):
 
         response = agent.chat(query)
         message_logger.info(
-            f"Course: {course} \t Query: {query} \t #response: {response}")
+            f"Course: {course} \t Query: {query} \t response: {response}")
 
         output = response.response + self.build_sources_output(response)
 
