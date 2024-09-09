@@ -1,10 +1,8 @@
 import time
 import warnings
 
-
 from ChatBot import ChatBot, Course
 from logger import chatbot_logger, message_logger, unanswered_questions_logger
-
 
 warnings.filterwarnings(
     "ignore", message=".*Torch was not compiled with flash attention.*")

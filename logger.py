@@ -4,6 +4,7 @@ import os
 formatter = logging.Formatter(
     '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+
 def unanswered_questions_logger(logLevel: int = logging.WARNING, file: str = "temp/unanswered_questions.log") -> logging.Logger:
     """
     logs user questions that cannot be answered with the data provided
@@ -19,6 +20,7 @@ def unanswered_questions_logger(logLevel: int = logging.WARNING, file: str = "te
     logger.setLevel(logLevel)
     logger.addHandler(handler)
     return logger
+
 
 def _logger(logger: str, logLevel: int, file: str) -> logging.Logger:
     if not os.path.exists(os.path.dirname(file)):
