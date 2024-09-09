@@ -12,8 +12,8 @@ from llama_index.core.tools import FunctionTool, QueryEngineTool, ToolMetadata
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
 
-from helpers.RagPrompt import rag_messages, rag_template
-from PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
+from src.helpers.PriorityNodeScoreProcessor import PriorityNodeScoreProcessor
+from src.helpers.RagPrompt import rag_messages, rag_template
 
 message_logger = logging.getLogger('Messages')
 chatbot_logger = logging.getLogger('ChatBot')
