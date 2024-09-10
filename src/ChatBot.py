@@ -19,8 +19,8 @@ message_logger = logging.getLogger('Messages')
 chatbot_logger = logging.getLogger('ChatBot')
 unanswered_questions_logger = logging.getLogger('UnansweredQuestions')
 
-PERSIST_DIR = "./storage"
-DATA_DIR = "./data"
+DATA_DIR = ""
+PERSIST_DIR = ""
 
 
 class Course(Enum):
@@ -59,11 +59,16 @@ qa_messages = [
 
 
 class ChatBot(object):
-    def __init__(self):
-        print("ChatBot Initializing...")
+    def __init__(self, documents_dir="./data/documents", index_dir="./data/index"):
+        chatbot_logger.info("ChatBot Initializing...")
+
+        # allow parameterization of data and index directories
+        global DATA_DIR, PERSIST_DIR
+        DATA_DIR = documents_dir
+        PERSIST_DIR = index_dir
+
         self.agents = {}
 
-        chatbot_logger.info("ChatBot Initializing...")
         # Check if CUDA is available
         device = "cuda" if torch.cuda.is_available() else "cpu"
         chatbot_logger.info(f"Using device: {device}")
@@ -78,9 +83,8 @@ class ChatBot(object):
         for course in Course:
             self.__load_index(course)
             self.refresh_index(course)
-        chatbot_logger.info("ChatBot Initialized.")
         self.agents[course] = self.__create_agent(course)
-        print("ChatBot Initialized.")
+        chatbot_logger.info("ChatBot Initialized.")
 
     def get_source_info(self, course, document):
         """
