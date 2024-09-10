@@ -172,6 +172,7 @@ class ChatBot(object):
         return index
 
     def refresh_index(self, course: Course):
+        """ Update documents in vector store"""
         chatbot_logger.info("Refreshing index...")
         chatbot_logger.debug(f"Course: {course}")
         chatbot_logger.debug(f"Data dir: {course.data_dir()}")
@@ -199,18 +200,19 @@ class ChatBot(object):
 
     def __create_agent(self, course: Course):
         """
-        Create chatbot agent
+        Create chatbot agent and set up tools to be called trough ai
         :param course: the desired course
         :return: agent to chat with
         """
         index = self.__load_index(course)
+
+        # RAG engine to receive data from documents
         query_engine = index.as_query_engine(
             text_qa_template=rag_template,
             streaming=False,
             node_postprocessors=[PriorityNodeScoreProcessor()]
         )
 
-        # RAG TOOL
         rag_tool = QueryEngineTool(
             query_engine=query_engine,
             metadata=ToolMetadata(
@@ -220,6 +222,7 @@ class ChatBot(object):
             )
         )
 
+        # tool to log questions not answered trough ai
         log_tool = FunctionTool.from_defaults(fn=self.log_unanswered_question)
 
         return ReActAgent.from_tools(
@@ -263,6 +266,12 @@ class ChatBot(object):
         return output
 
     def perform_query(self, query: str, course: Course):
+        """
+        Run chat query
+        :param query:
+        :param course:
+        :return:
+        """
         chatbot_logger.info(f"Performing query")
         chatbot_logger.debug(f"Query: {query}")
         chatbot_logger.debug(f"Course: {course}")
