@@ -224,13 +224,38 @@ class ChatBot(object):
             verbose=True,
             max_iterations=10)
 
-    def build_sources_output(self, ai_response):
+    def build_sources_output(self, ai_response, max_sources=None):
+        """
+        Build sources string for output, combining sources of the same type with multiple page references
+        :param ai_response: The AI response containing source nodes
+        :param max_sources: Maximum number of unique sources to include (optional)
+        :return: Formatted string of sources or empty string if no valid sources
+        """
         if ai_response.source_nodes is None:
             return None
 
+        sources_dict = {}
+        for node in ai_response.source_nodes:
+            source_link = node.metadata.get('source_link')
+            if source_link is None or source_link == "-":
+                continue
+
+            page_label = node.metadata.get('page_label')
+            if source_link not in sources_dict:
+                sources_dict[source_link] = set()
+            if page_label:
+                sources_dict[source_link].add(page_label)
+
+        if not sources_dict:
+            return ""
+
         output = "\n\nQuellen:"
-        for index, node in enumerate(ai_response.source_nodes, start=1):
-            output += f"\n [{index}] {node.metadata['source_link']}"
+        for index, (source, pages) in enumerate(list(sources_dict.items())[:max_sources], start=1):
+            output += f"\n [{index}] {source}"
+            if pages:
+                pages_list = sorted(pages, key=lambda x: int(x) if x.isdigit() else x)
+                output += f", Seite{'n' if len(pages) > 1 else ''}: {', '.join(pages_list)}"
+
         return output
 
     def perform_query(self, query: str, course: Course):
