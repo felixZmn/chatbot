@@ -4,7 +4,6 @@ import os
 from enum import Enum
 
 import torch
-from llama_cloud import ChatMessage, MessageRole
 from llama_index.core import (Settings, SimpleDirectoryReader, StorageContext,
                               VectorStoreIndex, load_index_from_storage)
 from llama_index.core.agent import ReActAgent
@@ -25,14 +24,14 @@ PERSIST_DIR = ""
 
 
 class Course(Enum):
-    WI = "/wi"
-    IT = "/it"
+    WI = "wi"
+    IT = "it"
 
     def data_dir(self) -> str:
-        return DATA_DIR + self.value
+        return DATA_DIR + "/" + self.value
 
     def persist_dir(self) -> str:
-        return PERSIST_DIR + self.value
+        return PERSIST_DIR + "/" + self.value
 
 
 class ChatBot(object):
@@ -239,7 +238,8 @@ class ChatBot(object):
         for index, (source, pages) in enumerate(list(sources_dict.items())[:max_sources], start=1):
             output += f"\n [{index}] {source}"
             if pages:
-                pages_list = sorted(pages, key=lambda x: int(x) if x.isdigit() else x)
+                pages_list = sorted(
+                    pages, key=lambda x: int(x) if x.isdigit() else x)
                 output += f", Seite{'n' if len(pages) > 1 else ''}: {', '.join(pages_list)}"
 
         return output
