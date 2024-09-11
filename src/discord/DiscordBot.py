@@ -43,7 +43,7 @@ class DiscordBot(commands.Bot):
         for msg in pinned_messages:
             if msg.content.startswith('Kurs:') and msg.author.id == self.user.id:
                 course = Course(msg.content.split(': ')[1].lower())
-            if msg.content == disclaimer:
+            if msg.content.startswith("## **Disclaimer:**"):
                 disclaimer_present = True
 
         if not disclaimer_present:
