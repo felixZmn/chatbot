@@ -39,7 +39,7 @@ class DiscordBot(commands.Bot):
         course: Course = None
         # check if course is pinned
         for msg in pinned_messages:
-            if msg.content.startswith('Kurs:'):
+            if msg.content.startswith('Kurs:') and msg.author.id == self.user.id:
                 course = Course(msg.content.split(': ')[1].lower())
                 break
 
