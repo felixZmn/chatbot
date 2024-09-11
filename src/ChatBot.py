@@ -43,8 +43,6 @@ class ChatBot(object):
         DATA_DIR = documents_dir
         PERSIST_DIR = index_dir
 
-        self.agents = {}
-
         # Check if CUDA is available
         device = "cuda" if torch.cuda.is_available() else "cpu"
         chatbot_logger.info(f"Using device: {device}")
@@ -59,7 +57,6 @@ class ChatBot(object):
         for course in Course:
             self.__load_index(course)
             self.refresh_index(course)
-        self.agents[course] = self.__create_agent(course)
         chatbot_logger.info("ChatBot Initialized.")
 
     def get_source_info(self, course, document):
@@ -254,7 +251,7 @@ class ChatBot(object):
         chatbot_logger.info(f"Performing query")
         chatbot_logger.debug(f"Query: {query}")
         chatbot_logger.debug(f"Course: {course}")
-        agent = self.agents[course]
+        agent = self.__create_agent(course)
 
         response = agent.chat(query)
         message_logger.info(
