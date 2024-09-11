@@ -78,6 +78,20 @@ ansible-playbook -i inventory.yml playbook.yml
 
 ## Usage
 
+### Environment Variables
+
+The chatbot can be configured using environment variables. The following environment variables are available:
+
+| Variable Name | Description                                  | Default Value    |
+| ------------- | -------------------------------------------- | ---------------- |
+| DISCORD_TOKEN | The Discord bot token                        | None             |
+| DOCUMENTS_DIR | The directory where the documents are stored | ./data/documents |
+| INDEX_DIR     | The directory where the index is stored      | ./data/index     |
+
+Variables with no default value are required.
+
+### Running the Chatbot
+
 To start the chatbot, run the following command:
 
 ```bash
