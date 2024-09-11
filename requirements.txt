@@ -4,3 +4,4 @@ llama-index-embeddings-huggingface==0.2.3
 torch 
 torchvision
 torchaudio
+discord.py==2.4.0
