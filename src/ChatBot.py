@@ -222,22 +222,23 @@ class ChatBot(object):
             if source_link is None or source_link == "-":
                 continue
 
+            file_name = node.metadata.get('file_name')
             page_label = node.metadata.get('page_label')
             if source_link not in sources_dict:
-                sources_dict[source_link] = set()
+                sources_dict[source_link] = {'file_name': file_name, 'pages': set()}
             if page_label:
-                sources_dict[source_link].add(page_label)
+                sources_dict[source_link]['pages'].add(page_label)
 
         if not sources_dict:
             return ""
 
         output = "\n\nQuellen:"
-        for index, (source, pages) in enumerate(list(sources_dict.items())[:max_sources], start=1):
-            output += f"\n [{index}] {source}"
-            if pages:
+        for index, (source, info) in enumerate(list(sources_dict.items())[:max_sources], start=1):
+            output += f"\n [{index}] [{info['file_name']}][({source})"
+            if info['pages']:
                 pages_list = sorted(
-                    pages, key=lambda x: int(x) if x.isdigit() else x)
-                output += f", Seite{'n' if len(pages) > 1 else ''}: {', '.join(pages_list)}"
+                    info['pages'], key=lambda x: int(x) if x.isdigit() else x)
+                output += f", Seite{'n' if len(info['pages']) > 1 else ''}: {', '.join(pages_list)}"
 
         return output
 
