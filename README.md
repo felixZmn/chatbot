@@ -33,14 +33,14 @@ directory.
 
 ### Step By Step Guide
 
-1. Installing ansible:
+1.  Installing ansible:
 
-       ```bash
-       sudo apt install ansible
-       ```
+        ```bash
+        sudo apt install ansible
+        ```
 
-   If the connection to the server is established via ssh useranme and password instead
-   of ssh key, the package `sshpass` must be installed additionally:
+    If the connection to the server is established via ssh useranme and password instead
+    of ssh key, the package `sshpass` must be installed additionally:
 
 ```bash
 sudo apt install sshpass
@@ -95,7 +95,7 @@ Variables with no default value are required.
 To start the chatbot, run the following command:
 
 ```bash
-python DiscordChatBot.py
+python Bot_main.py
 ```
 
 ## Adding and Managing Sources for RAG
@@ -105,29 +105,29 @@ to include to the vector store must be placed in the **data/[course]** folder. F
 needed. This file has the structure shown below:
 
 ```
-{  
-  "sources": [  
-    {  
-      "priority": 1,  
-      "name": "Leitlinien Studium",  
-      "file": "Leitlinien.pdf",  
-      "description": "Informationen über die Studienordnung, Prüfungen",  
-      "web_link": "https://daten.de/Leitlinien.pdf"  
+{
+  "sources": [
+    {
+      "priority": 1,
+      "name": "Leitlinien Studium",
+      "file": "Leitlinien.pdf",
+      "description": "Informationen über die Studienordnung, Prüfungen",
+      "web_link": "https://daten.de/Leitlinien.pdf"
     }
-  ]  
+  ]
 }
 ```
 
-| Field       | Description                                                                                                                                                                                                             |
-|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| priority    | Manipulates the "Similarity Score" used for ranking documents. Default value is **1**. This value represents an unchanged priority.<br>The Similarity Score (value from 0-1) is multiplied by this value.               |
-| name        | Understandable human-readable identifier of the document. This name is displayed as source reference.                                                                                                                   |
-| file        | Exact specification of the filename with file extension.                                                                                                                                                                |
-| description | Brief description of the content of this file. When should one look into this file?                                                                                                                                     |
-| web_link    | Link of the source. This link will be provided in chat. If the value is set to **"-"**, this document will not be included in the source reference and is thus a "hidden" source. This is useful for FAQs, for example. |
+| Field       | Description                                                                                                                                                                                                                             |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| priority    | Manipulates the "Similarity Score" used for ranking documents. Default value is **1**. This value represents an unchanged priority.<br>The Similarity Score (value from 0-1) is multiplied by this value.                               |
+| name        | Understandable human-readable identifier of the document.                                                                                                                                                                               |
+| file        | Exact specification of the filename with file extension.                                                                                                                                                                                |
+| description | Brief description of the content of this file. When should one look into this file?                                                                                                                                                     |
+| web_link    | Link or identifier that is output in the chat as a source reference.<br>If the value is set to **"-"**, this document will not be included in the source reference and is thus a "hidden" source. This is useful for FAQs, for example. |
 
 ## Known Issues
 
 - Error loading "fbgemm.dll" or one of its dependencies:
-    - Solution: Install the Visual Studio Installer and the MSVC v143 VS Build Tools\
-      Read more [here](https://github.com/pytorch/pytorch/issues/131662#issuecomment-2252589253)
+  - Solution: Install the Visual Studio Installer and the MSVC v143 VS Build Tools\
+    Read more [here](https://github.com/pytorch/pytorch/issues/131662#issuecomment-2252589253)
