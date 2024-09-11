@@ -21,6 +21,11 @@ class Dropdown(discord.ui.Select):
         # Sends a message with the course that was selected
         await interaction.response.send_message(f'Kurs: {self.values[0]}')
         message = await interaction.original_response()
+        # remove old pinned messages to avoid clutter
+        pinned_messages = await message.channel.pins()
+        for msg in pinned_messages:
+            if msg.content.startswith('Kurs:') and msg.author.id == interaction.client.user.id:
+                await msg.unpin()
         # pin the message for further use
         await message.pin()
         print(f"message: {message}")
