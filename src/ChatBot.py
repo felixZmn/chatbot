@@ -234,7 +234,7 @@ class ChatBot(object):
 
         output = "\n\nQuellen:"
         for index, (source, info) in enumerate(list(sources_dict.items())[:max_sources], start=1):
-            output += f"\n [{index}] [{info['file_name']}][({source})"
+            output += f"\n [{index}] [{info['file_name']}]({source})"
             if info['pages']:
                 pages_list = sorted(
                     info['pages'], key=lambda x: int(x) if x.isdigit() else x)
