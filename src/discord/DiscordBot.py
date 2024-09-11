@@ -6,6 +6,7 @@ from discord import Message
 from discord.ext import commands
 from src.ChatBot import ChatBot, Course
 from src.discord.Dropdowns import DropdownView
+from src.discord.disclaimer import disclaimer
 
 chatbot_logger = logging.getLogger('ChatBot')
 
@@ -37,14 +38,18 @@ class DiscordBot(commands.Bot):
         pinned_messages = await message.channel.pins()
 
         course: Course = None
+        disclaimer_present = False
         # check if course is pinned
         for msg in pinned_messages:
             if msg.content.startswith('Kurs:') and msg.author.id == self.user.id:
                 course = Course(msg.content.split(': ')[1].lower())
                 break
+            if msg.content == disclaimer:
+                disclaimer_present = True
 
-        print(f'course: {course}')
-        print(f'message: {message.content}')
+        if not disclaimer_present:
+            msg = await message.channel.send(disclaimer)
+            await msg.pin()
 
         if course is None:
             view = DropdownView()
