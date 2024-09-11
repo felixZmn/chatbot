@@ -17,9 +17,9 @@
     {
       "priority": 1,
       "name": "FAQ",
-      "file": "FAQ.pdf",
+      "file": "FAQ.yaml",
       "description": "FAQ Fragen - Antworten",
-      "web_link": "Dokument des Studiengangleiters"
+      "web_link": "-"
     }
   ]
 }

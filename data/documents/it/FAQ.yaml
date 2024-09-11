@@ -1,0 +1,18 @@
+questions:
+  - question: Wo findet die Mathe-Klausur statt?
+    keywords:
+      - Mathe
+      - Klausur
+    answer:
+      - raum: 603
+      - dozent: Neuner
+  - question: Wann ist die Abgabe der Bachelorarbeit?
+    keywords:
+        - Bachelorarbeit
+        - Abgabe
+        - Frist
+        - Deadline
+    answer:
+      - Abgabe 29.07.2024 23:59
+      - Abgabe in Moodle
+      - Keine Papierform nötig
