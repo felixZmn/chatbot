@@ -20,6 +20,13 @@
       "file": "FAQ.yaml",
       "description": "FAQ Fragen - Antworten",
       "web_link": "-"
+    },
+    {
+      "priority": 1,
+      "name": "Prüfungsordnung",
+      "file": "191212_Leitlinien_Praxismodule_Studien_Bachelorarbeiten.pdf",
+      "description": "Prüfungsordnung für den Studiengang Informatik",
+      "web_link": "https://www.heidenheim.dhbw.de/fileadmin/user_upload/Dokumente/Amtliche_Bekanntmachungen/2023/21_2023_Bekanntmachung_StuPrO_Technik_inkl._Siebter_AEnderungssatzung.pdf"
     }
   ]
 }
