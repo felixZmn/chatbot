@@ -15,11 +15,11 @@
       "web_link": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Studieninhalte_und_Profil/Studiengangsflyer_web_Informatik.pdf"
     },
     {
-      "priority": 1,
+      "priority": 1.2,
       "name": "FAQ",
-      "file": "FAQ.yaml",
+      "file": "FAQ.txt",
       "description": "FAQ Fragen - Antworten",
-      "web_link": "-"
+      "web_link": "https://www.google.de/"
     },
     {
       "priority": 1,
