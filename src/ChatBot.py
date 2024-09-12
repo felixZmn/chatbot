@@ -7,6 +7,7 @@ import torch
 from llama_index.core import (Settings, SimpleDirectoryReader, StorageContext,
                               VectorStoreIndex, load_index_from_storage)
 from llama_index.core.agent import ReActAgent
+from llama_index.core.query_engine import CitationQueryEngine
 from llama_index.core.tools import FunctionTool, QueryEngineTool, ToolMetadata
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
@@ -180,9 +181,10 @@ class ChatBot(object):
         index = self.__load_index(course)
 
         # RAG engine to receive data from documents
-        query_engine = index.as_query_engine(
-            text_qa_template=rag_template,
-            streaming=False,
+        query_engine = CitationQueryEngine.from_args(
+            index,
+            similarity_top_k=3,
+            citation_chunk_size=512,
             node_postprocessors=[PriorityNodeScoreProcessor()]
         )
 
@@ -254,10 +256,13 @@ class ChatBot(object):
         chatbot_logger.debug(f"Course: {course}")
         agent = self.__create_agent(course)
 
-        response = agent.chat(query)
-        message_logger.info(
-            f"Course: {course} \t Query: {query} \t response: {response}")
+        try:
+            response = agent.chat(query)
+            message_logger.info(
+                f"Course: {course} \t Query: {query} \t response: {response}")
 
-        output = response.response + self.build_sources_output(response)
+            output = response.response + self.build_sources_output(response)
 
-        return output
+            return output
+        except:
+            return "Diese Frage kann leider nicht beantwortet werden!"

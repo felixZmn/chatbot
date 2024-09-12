@@ -8,14 +8,14 @@
       "web_link": "https://www.dhbw.de/fileadmin/user_upload/Dokumente/Dokumente_fuer_Studierende/191212_Leitlinien_Praxismodule_Studien_Bachelorarbeiten.pdf"
     },
     {
-      "priority": 1,
+      "priority": 1.2,
       "name": "Informationsflyer Studiengang Informatik",
       "file": "Studiengangsflyer_web_Informatik.pdf",
       "description": "Infos zum Studium. Vorteile des dualen Studiums. Studiengangsleitung und Schwerpunkte der Studienrichtung, sowie mögliche Berufsfelder nach Abschluss",
       "web_link": "https://www.heidenheim.dhbw.de/fileadmin/Heidenheim/Studienangebot/Bachelor_Technik/Informatik/Studieninhalte_und_Profil/Studiengangsflyer_web_Informatik.pdf"
     },
     {
-      "priority": 1.2,
+      "priority": 1,
       "name": "FAQ",
       "file": "FAQ.txt",
       "description": "FAQ Fragen - Antworten",
@@ -24,7 +24,7 @@
     {
       "priority": 1,
       "name": "Prüfungsordnung",
-      "file": "191212_Leitlinien_Praxismodule_Studien_Bachelorarbeiten.pdf",
+      "file": "21_2023_Bekanntmachung_StuPrO_Technik_inkl._Siebter_AEnderungssatzung.pdf",
       "description": "Prüfungsordnung für den Studiengang Informatik",
       "web_link": "https://www.heidenheim.dhbw.de/fileadmin/user_upload/Dokumente/Amtliche_Bekanntmachungen/2023/21_2023_Bekanntmachung_StuPrO_Technik_inkl._Siebter_AEnderungssatzung.pdf"
     }
