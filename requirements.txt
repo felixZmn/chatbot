@@ -5,3 +5,5 @@ torch
 torchvision
 torchaudio
 discord.py==2.4.0
+docx2txt==0.8
+openpyxl==3.1.5
