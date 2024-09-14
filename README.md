@@ -39,8 +39,8 @@ directory.
 sudo apt install ansible
 ```
 
-    If the connection to the server is established via ssh useranme and password instead
-    of ssh key, the package `sshpass` must be installed additionally:
+If the connection to the server is established via ssh useranme and password instead
+of ssh key, the package `sshpass` must be installed additionally:
 
 ```bash
 sudo apt install sshpass
