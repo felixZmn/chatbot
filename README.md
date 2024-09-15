@@ -12,17 +12,17 @@ A Discord-based chatbot designed to answer university-related questions using Ll
 
 ## Features
 
--   Answers university-related questions based on faculty guidelines and other documents
--   Integrates seamlessly with Discord for easy access
--   Utilizes LlamaIndex for efficient document indexing and retrieval
--   Powered by Llama 3.1 for natural language processing
+- Answers university-related questions based on faculty guidelines and other documents
+- Integrates seamlessly with Discord for easy access
+- Utilizes LlamaIndex for efficient document indexing and retrieval
+- Powered by Llama 3.1 for natural language processing
 
 ## Technologies Used
 
--   Python
--   LlamaIndex
--   Llama 3.1
--   Discord.py
+- Python
+- LlamaIndex
+- Llama 3.1
+- Discord.py
 
 ## Installation
 
@@ -57,11 +57,11 @@ cd chatbot
 
 ```yaml
 ungrouped:
-    vars:
-        ansible_user: <username>
-        # optional, if no ssh key is used
-        ansible_ssh_pass: <password>
-    hosts: 123.123.123.123
+  vars:
+    ansible_user: <username>
+    # optional, if no ssh key is used
+    ansible_ssh_pass: <password>
+  hosts: 123.123.123.123
 ```
 
 4. Execute the playbook:
@@ -72,9 +72,9 @@ ansible-playbook -i inventory.yml playbook.yml
 
 5. Post-Installation steps
 
--   Create the discord bot in the Discord Developer Portal
--   Add the bot token to the `.env` file
--   Invite the bot to your Discord server using the OAuth2 URL generated in the Discord Developer Portal
+- Create the discord bot in the Discord Developer Portal
+- Add the bot token to the `.env` file
+- Invite the bot to your Discord server using the OAuth2 URL generated in the Discord Developer Portal
 
 ## Usage
 
@@ -126,8 +126,20 @@ needed. This file has the structure shown below:
 | description | Brief description of the content of this file. When should one look into this file?                                                                                                                                     |
 | web_link    | Link of the source. This link will be provided in chat. If the value is set to **"-"**, this document will not be included in the source reference and is thus a "hidden" source. This is useful for FAQs, for example. |
 
+### Supported Document Types
+
+https://docs.cloud.llamaindex.ai/llamaparse/features/supported_document_types
+
+#### currently tested document types of the project:
+
+.docx
+.pdf
+.xlsx
+.txt
+.csv
+
 ## Known Issues
 
--   Error loading "fbgemm.dll" or one of its dependencies:
-    -   Solution: Install the Visual Studio Installer and the MSVC v143 VS Build Tools\
-        Read more [here](https://github.com/pytorch/pytorch/issues/131662#issuecomment-2252589253)
+- Error loading "fbgemm.dll" or one of its dependencies:
+  - Solution: Install the Visual Studio Installer and the MSVC v143 VS Build Tools\
+    Read more [here](https://github.com/pytorch/pytorch/issues/131662#issuecomment-2252589253)
