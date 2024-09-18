@@ -23,10 +23,25 @@
     },
     {
       "priority": 1,
-      "name": "Prüfungsordnung",
-      "file": "21_2023_Bekanntmachung_StuPrO_Technik_inkl._Siebter_AEnderungssatzung.pdf",
-      "description": "Prüfungsordnung für den Studiengang Informatik",
-      "web_link": "https://www.heidenheim.dhbw.de/fileadmin/user_upload/Dokumente/Amtliche_Bekanntmachungen/2023/21_2023_Bekanntmachung_StuPrO_Technik_inkl._Siebter_AEnderungssatzung.pdf"
+      "name": "Aufbau Projektarbeit",
+      "file": "Aufbau_Projektarbeit.pdf",
+      "description": "Aufbau Projektarbeit",
+      "web_link": "Aufbau Projektarbeit"
+    },
+    {
+      "priority": 1,
+      "name": "OnePager WissArb",
+      "file": "OnePagerWissArb.pdf",
+      "description": "OnePagerWissArb.pdf",
+      "web_link": "OnePagerWissArb.pdf"
+    },
+    {
+      "priority": 1,
+      "name": "FAQ Texterstellung",
+      "file": "FAQ Texterstellung.pdf",
+      "description": "FAQ Texterstellung",
+      "web_link": "FAQ Texterstellung"
     }
+
   ]
 }
